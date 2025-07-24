@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App.jsx';
-import './style/app.css'; // your global style
+import AppWrapper from './App.jsx'; // renamed default export to AppWrapper
+import './style/app.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AppWrapper />
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import axios from 'axios';
+
 import './style/app.css';
 
 import Navbar from './components/navbar';
 import Dashboard from './pages/dashboard';
-import Login from './pages/Login';
+import Login from './pages/login';
 import Register from './pages/Register';
 
-function App() {
+function AppWrapper() {
+  const location = useLocation();
   const [status, setStatus] = useState('⏳ Connecting to backend...');
 
   useEffect(() => {
     axios.get('http://localhost:5000/')
-      .then((res) => setStatus(res.data))
-      .catch((err) => {
-        console.error('Backend connection error:', err);
-        setStatus('❌ Failed to connect to backend');
-      });
+      .then(res => setStatus(res.data))
+      .catch(() => setStatus('❌ Backend not reachable'));
   }, []);
+
+  const shouldHideNavbar = ['/login', '/register'].includes(location.pathname);
 
   return (
     <div className="app-container">
@@ -27,7 +28,7 @@ function App() {
         <p className="app-status">{status}</p>
       </header>
 
-      <Navbar />
+      {!shouldHideNavbar && <Navbar />}
 
       <main className="app-main">
         <Routes>
@@ -44,4 +45,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppWrapper;

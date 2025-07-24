@@ -1,12 +1,10 @@
 import React from 'react';
-import Navbar from '../components/navbar';
-import Sidebar from '../components/sidebar';
-import './Dashboard.css'; // Create this file for styling
+import Sidebar from "../components/sidebar"; // lowercase
+import './dashboard.css'; // make sure the CSS file is also lowercase
 
 const Dashboard = () => {
   return (
     <div className="dashboard-container">
-      <Navbar />
       <div className="dashboard-content">
         <Sidebar />
         <div className="dashboard-main">
